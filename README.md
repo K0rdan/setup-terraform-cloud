@@ -1,6 +1,12 @@
 # Setup Terraform Cloud
 
 ## Requirements
+### Tools
+- Docker
+- NodeJS
+- Typescript
+- Act
+### Environment
 - Create a Terraform Cloud Workspace
 - Create a user API token
 - Create a GCP credentials variables with :
