@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 14
+      - name: Get NPM package version
+        id: "npm_package"
+        run: |
+          echo "Reading package.json..."
+          echo "##[set-output name=version;]$(yarn run -s version)"
+      - name: Docker build
+        run: docker build -t k0rdan/setup-terraform-cloud:${{ steps.npm_package.version }}-$(date +"%Y%m%d")-$GITHUB_RUN_NUMBER-$GITHUB_SHA
+      - name: Docker upload
+        run: docker upload k0rdan/setup-terraform-cloud:${{ steps.npm_package.version }}-$(date +"%Y%m%d")-$GITHUB_RUN_NUMBER-$GITHUB_SHA
