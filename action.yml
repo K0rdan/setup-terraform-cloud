@@ -1,0 +1,15 @@
+name: 'Setup Terraform Cloud for GCP'
+description: 'Setup Terraform Cloud environment variable for GCP'
+inputs:
+  TF_WORKSPACE:
+    description: 'Terraform Cloud Workspace'
+    required: true    
+  TF_API_TOKEN:
+    description: 'Terraform Cloud API token'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.TF_WORKSPACE }}
+    - ${{ inputs.TF_API_TOKEN }}

@@ -1,0 +1,28 @@
+{
+  "name": "setup-terraform-cloud",
+  "version": "1.0.0",
+  "description": "Setup Terraform Cloud environment variable for GCP",
+  "main": "src/index.ts",
+  "author": "K0rdan",
+  "license": "MIT",
+  "scripts": {
+    "dev": "tsc --watch",
+    "start": "node ./out/index.js",
+    "build": "tsc -p ./tsconfig.json",
+    "type-check": "tsc",
+    "docker:build": "docker build -t k0rdan/setup-terraform-cloud:$npm_package_version .",
+    "docker:run": "docker run -it --env-file .env k0rdan/setup-terraform-cloud:$npm_package_version"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.21",
+    "@types/node-fetch": "^2.5.8",
+    "eslint": "^7.18.0",
+    "prettier": "^2.2.1",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
