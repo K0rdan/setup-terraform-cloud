@@ -18,7 +18,7 @@ jobs:
         id: "npm_package"
         run: |
           echo "Reading package.json..."
-          echo "##[set-output name=version;]$(yarn run -s version)"
+          echo "::set-output name=version::$(yarn run -s version)"
       - name: Docker build
         run: docker build -t k0rdan/setup-terraform-cloud:${{ steps.npm_package.version }}-$(date +"%Y%m%d")-$GITHUB_RUN_NUMBER-$GITHUB_SHA
       - name: Docker upload
