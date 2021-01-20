@@ -7,11 +7,9 @@
 - Typescript
 - Act
 ### Environment
-- Create a Terraform Cloud Workspace
-- Create a user API token
-- Create a GCP credentials variables with :
-  - `GOOGLE_CREDENTIALS` key
-  - `sensitive` property checked
+- Create Docker Hub variables :
+  - `DOCKERHUB_USERNAME`
+  - `DOCKERHUB_TOKEN`
 
 ## Usage
 ### Environment variables

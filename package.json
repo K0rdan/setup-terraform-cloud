@@ -12,7 +12,7 @@
     "type-check": "tsc",
     "docker:build": "docker build -t setup-terraform-cloud:local .",
     "docker:run": "docker run -it --env-file .env setup-terraform-cloud:local",
-    "github:build": "act -P ubuntu-latest=nektos/act-environments-ubuntu:18.04 -j build",
+    "github:build": "act -P ubuntu-latest=nektos/act-environments-ubuntu:18.04 -j build --secret-file ./.github/workflows/.secrets",
     "version": "echo $npm_package_version"
   },
   "devDependencies": {
