@@ -4,9 +4,9 @@ declare namespace NodeJS {
     NODE_ENV: 'development' | 'production';
     DEBUG: string | "false";
     // TERRAFORM CLOUD variables
-    TFC_WORKSPACE: string;
-    TFC_API_TOKEN: string;
+    INPUTS_TFC_WORKSPACE: string;
+    INPUTS_TFC_API_TOKEN: string;
     // GCP variables
-    GCP_CREDENTIALS: string;
+    INPUTS_GCP_CREDENTIALS: string;
   }
 }
