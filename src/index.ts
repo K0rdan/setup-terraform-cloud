@@ -3,39 +3,39 @@ import * as core from '@actions/core';
 
 import type { TFC_VARIABLES, TFC_VARIABLES_RESULT } from 'interfaces';
 
-const { DEBUG, INPUTS_TFC_WORKSPACE, INPUTS_TFC_API_TOKEN, INPUTS_GCP_CREDENTIALS } = process.env;
+const { DEBUG, INPUT_TFC_WORKSPACE, INPUT_TFC_API_TOKEN, INPUT_GCP_CREDENTIALS } = process.env;
 
-if (!INPUTS_TFC_WORKSPACE ||  !INPUTS_TFC_API_TOKEN) {
+if (!INPUT_TFC_WORKSPACE ||  !INPUT_TFC_API_TOKEN) {
   core.startGroup(
     '[Setup-TFC] Configuration error, missing Terraform Cloud variables',
   );
   if (DEBUG === 'true') {
-    core.debug(`- TFC_WORKSPACE = '${INPUTS_TFC_WORKSPACE}'`);
-    core.debug(`- TFC_API_TOKEN = '${INPUTS_TFC_API_TOKEN}'`);
+    core.debug(`- TFC_WORKSPACE = '${INPUT_TFC_WORKSPACE}'`);
+    core.debug(`- TFC_API_TOKEN = '${INPUT_TFC_API_TOKEN}'`);
   }
   core.endGroup();
   process.exit(-1);
-} else if (!INPUTS_GCP_CREDENTIALS) {
+} else if (!INPUT_GCP_CREDENTIALS) {
   core.startGroup('[Setup-TFC] Configuration error, missing Google Cloud Platform variables');
   if (DEBUG === 'true') {
-    core.debug(`- GCP_CREDENTIALS = '${INPUTS_GCP_CREDENTIALS}'`);
+    core.debug(`- GCP_CREDENTIALS = '${INPUT_GCP_CREDENTIALS}'`);
   }
   core.endGroup();
   process.exit(-1);
 } else {
   core.startGroup('[Setup-TFC] All requirements are OK');
   if (DEBUG === 'true') {
-    core.debug(`- TF_WORKSPACE = '${INPUTS_TFC_WORKSPACE}'`);
-    core.debug(`- TF_API_TOKEN = '${INPUTS_TFC_API_TOKEN}'`);
-    core.debug(`- GCP_CREDENTIALS = '${INPUTS_GCP_CREDENTIALS}'`);
+    core.debug(`- TF_WORKSPACE = '${INPUT_TFC_WORKSPACE}'`);
+    core.debug(`- TF_API_TOKEN = '${INPUT_TFC_API_TOKEN}'`);
+    core.debug(`- GCP_CREDENTIALS = '${INPUT_GCP_CREDENTIALS}'`);
   }
   core.endGroup();
 }
 
-const tfc_url: RequestInfo = `https://app.terraform.io/api/v2/workspaces/${INPUTS_TFC_WORKSPACE}/vars`;
+const tfc_url: RequestInfo = `https://app.terraform.io/api/v2/workspaces/${INPUT_TFC_WORKSPACE}/vars`;
 const tfc_headers: Headers = new Headers();
 tfc_headers.append("Content-Type", "application/vnd.api+json");
-tfc_headers.append("Authorization", `Bearer ${INPUTS_TFC_API_TOKEN}`);
+tfc_headers.append("Authorization", `Bearer ${INPUT_TFC_API_TOKEN}`);
 
 const getTFCVariables: TFC_VARIABLES = async (): Promise<TFC_VARIABLES_RESULT> => {
   core.startGroup('[Setup-TFC] Getting Terraform Cloud variables...');
@@ -68,7 +68,7 @@ const updateTFCVariable = async (varId: String) => {
         id: varId,
         attributes: {
           key: "GOOGLE_CREDENTIALS",
-          value: INPUTS_GCP_CREDENTIALS,
+          value: INPUT_GCP_CREDENTIALS,
           description: "GCP credential associated to a specific project",
           category: "env",
           hcl: false,
