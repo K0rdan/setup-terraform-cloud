@@ -8,6 +8,6 @@ RUN \
   yarn install --loglevel warn &&\
   yarn build
 
-CMD [ "yarn", "start"]
+CMD [ "yarn", "--cwd=/usr/src/app", "start"]
 
 

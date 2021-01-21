@@ -13,3 +13,4 @@ runs:
   args:
     - ${{ inputs.TF_WORKSPACE }}
     - ${{ inputs.TF_API_TOKEN }}
+    - yarn --cwd=/usr/src/app start
